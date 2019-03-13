@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 
 // Express runs its middleware in order. So make sure this app.use code runs before you set up your routes.
 //By default, the cors library will allow requests from any origin. This can open you up to security problems and abuse.
