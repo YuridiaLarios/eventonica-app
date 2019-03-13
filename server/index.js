@@ -11,9 +11,10 @@ const {
   Pool
 } = require('pg')
 const pool = new Pool({
-  host: 'localhost',
-  database: 'eventonica',
-  port: 5000
+  // Make sure you swap out <user> and <password>
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica'
+  // Use SSL but only in production
+  ssl: process.env.NODE_ENV === 'production'
 })
 
 
