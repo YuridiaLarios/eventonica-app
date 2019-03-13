@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const path = require('path');
+// const path = require('path');
 
 // Express runs its middleware in order. So make sure this app.use code runs before you set up your routes.
 //By default, the cors library will allow requests from any origin. This can open you up to security problems and abuse.
@@ -10,9 +10,9 @@ app.use(express.json()); // get ability to use body for post, put, delete;
 
 const {
   Pool
-} = require('pg')
+} = require('pg');
 const pool = new Pool({
-  // connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === 'production'
 })
@@ -98,6 +98,6 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
