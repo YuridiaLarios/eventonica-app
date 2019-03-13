@@ -12,7 +12,8 @@ const {
   Pool
 } = require('pg')
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
+  // connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
+  connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === 'production'
 })
 
@@ -97,6 +98,6 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
