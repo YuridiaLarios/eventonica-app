@@ -11,11 +11,9 @@ const {
   Pool
 } = require('pg')
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
-  // Use SSL but only in production
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/<eventonica>',
   ssl: process.env.NODE_ENV === 'production'
-});
-
+})
 
 
 
@@ -85,8 +83,8 @@ app.delete('/events/:id', async (req, res) => {
   client.release();
 });
 
+
 // Add this below all your other routes
-// This block of code only runs in production. When it runs, it will serve your Javascript files if the URL doesn't match an existing API.
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -97,5 +95,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
+
