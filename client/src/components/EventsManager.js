@@ -71,7 +71,7 @@ class EventsManager extends Component {
   //MAIN ALL EVENTS UI
   // moving it here makes it accessible to all children components
   componentDidMount() {
-    const url = `http://localhost:3000/events`;
+    const url = `/events`;
 
     fetch(url)
       .then((response) => {
