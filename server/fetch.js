@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-let promise = fetch('http://localhost:3000/events');
+let promise = fetch('/events');
 promise.then((res) => {
   return res.json();
 }).then((json) => {

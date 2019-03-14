@@ -6,7 +6,7 @@ class SideAddEvents extends Component {
       'name': eventName //body
     };
 
-    const url = `http://localhost:3000/events`;
+    const url = `/events`;
 
     fetch(url, { //endpoint
         method: 'post',

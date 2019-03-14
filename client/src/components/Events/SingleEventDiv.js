@@ -18,7 +18,7 @@ class SingleEventDiv extends Component {
 
   // to handle deleting an event from database
   handleDeleteSearch = (eventId) =>{
-    const url = "http://localhost:3000/events/" + eventId;
+    const url = "/events/" + eventId;
 
     fetch(url, { //endpoint
         method: 'delete'
@@ -43,7 +43,7 @@ class SingleEventDiv extends Component {
   
   // to handle updating an event from database
   handleUpdateSearch = (eventId) =>{
-    const url = "http://localhost:3000/events/" + eventId;
+    const url = "/events/" + eventId;
     const body = {
       'name': "hardcoded new name"
     };

@@ -4,7 +4,7 @@ import Error from './Error';
 
 class SideDeleteEvents extends Component {
   handleSearch = (eventId) =>{
-    const url = "http://localhost:3000/events/" + eventId;
+    const url = "/events/" + eventId;
 
     fetch(url, { //endpoint
         method: 'delete'

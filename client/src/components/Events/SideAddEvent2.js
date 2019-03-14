@@ -20,7 +20,7 @@ class SideAddEvent2 extends Component {
       'name': this.state.value //body
     };
 
-    const url = `http://localhost:3000/events`;
+    const url = `/events`;
 
     fetch(url, { //endpoint
         method: 'post',

@@ -4,7 +4,7 @@ import Error from './Error';
 
 class SideEventById extends Component {
   handleSearch = (eventId) =>{
-    let url = 'http://localhost:3000/events/'+eventId;
+    let url = '/events/'+eventId;
   fetch(url).then(response => response.json()).then((data) => {
       console.log(data);
       this.setState({

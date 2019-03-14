@@ -57,7 +57,7 @@ class SideUpdateEvents extends Component {
       const body = {
         'name': this.state.nameInputField,
       };
-      fetch('http://localhost:3000/events/' + this.state.idInputField, {
+      fetch('/events/' + this.state.idInputField, {
         method: 'put',
         body: JSON.stringify(body),
         headers: {
