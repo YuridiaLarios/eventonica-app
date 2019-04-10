@@ -12,7 +12,7 @@ const {
   Pool
 } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5000/eventonica',
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/eventonica',
   ssl: process.env.NODE_ENV === 'production'
 })
 
@@ -35,6 +35,10 @@ let events = [{
 
 pool.connect();
 
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
+
 app.get('/events', async (req, res) => {
   const client = await pool.connect();
   var events = await client.query("SELECT * FROM events");
@@ -44,10 +48,26 @@ app.get('/events', async (req, res) => {
 });
 
 
-app.get('/events/:id', async (req, res) => {
+app.get('/events/:id(\\d+)/', async (req, res) => {
   const client = await pool.connect();
   var events = await client.query("SELECT * FROM events  WHERE id=$1", [req.params.id]);
- // res.set('Access-Control-Allow-Origin', "*") // allow cors for any domain
+  // res.set('Access-Control-Allow-Origin', "*") // allow cors for any domain
+  console.log("events.rows = ", events.rows);
+  console.log("events.row = ", events.rows[0]);
+  if (events.rowCount === 0) {
+    res.status(404).send('ID not found, type a differen one!');
+  } else {
+    res.json(events.rows[0]);
+  }
+  client.release();
+});
+
+
+// getting event by name
+app.get('/events/:name', async (req, res) => {
+  const client = await pool.connect();
+  var events = await client.query("SELECT * FROM events  WHERE name=$1", [req.params.name]);
+  // res.set('Access-Control-Allow-Origin', "*") // allow cors for any domain
   res.json(events.rows[0]);
   client.release();
 });
@@ -90,7 +110,7 @@ if (process.env.NODE_ENV === "production") {
   // Serve any static files
   app.use(express.static(path.join(__dirname, "../client/build")));
   // Handle React routing, return all requests to React app
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
@@ -99,4 +119,3 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
-
