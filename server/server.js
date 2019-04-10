@@ -35,9 +35,9 @@ let events = [{
 
 pool.connect();
 
-app.get('/', function (req, res) {
-  res.send('hello world')
-})
+// app.get('/', function (req, res) {
+//   res.send('hello world')
+// })
 
 app.get('/events', async (req, res) => {
   const client = await pool.connect();
